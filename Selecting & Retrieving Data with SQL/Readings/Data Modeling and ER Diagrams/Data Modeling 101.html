@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://www.agiledata.org/essays/dataModeling101.html -->
+<html lang="en" class="gr__agiledata_org"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="generator" content="CoffeeCup HTML Editor (www.coffeecup.com)">
+    <meta name="created" content="Fri, 19 Apr 2013 14:45:47 GMT">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>Data Modeling 101</title>
+    <link rel="stylesheet" type="text/css" href="./Data Modeling 101_files/globalnew.css">
+    <link rel="shortcut icon" href="http://www.agiledata.org/images/adfavicon.ico" type="image/x-icon">
+    
+    <!--[if IE]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	
+	<!-- Share this -->
+	<iframe id="pxcelframe" src="./Data Modeling 101_files/t_.html" style="display: none;"></iframe><script type="text/javascript" id="async-buttons" src="./Data Modeling 101_files/async-buttons.js.download"></script><script type="text/javascript">var switchTo5x=false;</script>
+    <script type="text/javascript" src="./Data Modeling 101_files/buttons.js.download"></script> 
+    <script type="text/javascript">stLight.options({publisher: "34c92769-6f09-4d16-a43a-89a633996d44", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+	<!-- Share this -->
+	
+  <link rel="stylesheet" type="text/css" href="./Data Modeling 101_files/buttons-secure.css"></head>
+
+<body data-gr-c-s-loaded="true">
+
+<header>
+  <!-- Title bar -->
+  <table border="0" width="100%" class="titlebox">
+  <tbody><tr>
+    <td width="7%">
+	  <a href="http://www.agiledata.org/">
+	  <img border="0" src="./Data Modeling 101_files/logoAgileData.gif" alt="Agile Data"></a>
+	</td>
+    <td width="93%">
+      <p align="center" class="maintitle">Data Modeling 101</p>
+	  <p align="center"><a href="http://twitter.com/scottwambler" target="_blank"><img border="0" src="./Data Modeling 101_files/twitterScott.png" alt="Follow @scottwambler on Twitter!"></a></p> 
+	</td>
+  </tr>
+  </tbody></table>
+  <!-- Title bar -->  
+
+
+</header>
+
+<!-- Nav bar -->
+  <nav>    
+  <ul>      
+  <li><a href="http://agiledata.org/">Home</a></li>      
+  <li><a href="http://agiledata.org/essays/roles.html">Roles</a>        
+  		 <ul>            
+		 <li><a href="http://agiledata.org/essays/dbaSkills.html">Agile DBA</a></li>            
+		 <li><a href="http://agiledata.org/essays/developerSkills.html">Developer</a></li>            
+		 <li><a href="http://agiledata.org/essays/enterpriseArchitecture.html">Enterprise Architect</a></li>
+		 <li><a href="http://agiledata.org/essays/enterpriseAdministration.html">Enterprise Administrator</a></li>        
+		 </ul>      
+  </li>      
+  <li><a href="http://agiledata.org/essays/bestPractices.html">Practices</a>        
+  		 <ul>
+		 <li><a href="http://agiledata.org/essays/verticalSlicing.html">Vertical slicing</a></li>            
+		 <li><a href="http://agiledata.org/essays/agileDataModeling.html">Agile data modeling</a></li>            
+  		 <li><a href="http://agiledata.org/essays/databaseRefactoring.html">Database refactoring</a></li>            
+		 <li><a href="http://agiledata.org/essays/databaseTesting.html">Database testing</a></li>            
+		 <li><a href="http://agiledata.org/essays/tdd.html">Test-driven development (TDD)</a></li>            
+		 <li><a href="http://agiledata.org/essays/dataNormalization.html">Data normalization</a></li>            
+		 </ul>      
+  </li>      
+  <li><a href="http://agiledata.org/essays/roadMaps.html">Road maps</a>        
+  		 <ul>            
+  		 <li><a href="http://agiledata.org/essays/disciplinedAgileDW.html">Disciplined agile data warehousing</a></li>            
+		 <li><a href="http://agiledata.org/essays/dataGovernance.html">Lean data governance</a></li>            
+		 <li><a href="http://agiledata.org/essays/masterDataManagement.html">Agile MDM</a></li>            
+		 </ul>      
+  </li>
+  <li><a href="http://agiledata.org/">Resources</a>        
+  		 <ul>            
+		 <li><a href="http://agiledata.org/books.html">Books</a></li>            
+  		 <li><a href="https://www.ibm.com/developerworks/community/blogs/ambler/">Scaling agile blog</a></li>            
+		 <li><a href="http://agiledata.org/siteMap.html">Site map</a></li>            
+		 <li><a href="http://agiledata.org/help.html">Help</a></li>            
+		 <li><a href="http://agiledata.org/essays/caseStudies.html">Case studies</a></li>            
+		 </ul>      
+  </li>
+  <li><a href="http://disciplined-agile.com/" target="_blank">Contact us</a></li>
+  
+  </ul>
+  </nav>
+  <!-- Nav bar -->
+  
+  <!-- SiteSearch Google -->
+  <form method="get" action="http://www.google.com/custom">
+  <input type="hidden" name="cof" value="L:http://AgileData.org/images/logoAgileData.gif;BGC:#FFFFFF;AH:center;GL:0;S:http://AgileData.org;AWFID:9f873e648db9a709;">
+  <input type="hidden" name="domains" value="AgileData.org;www.agilemodeling.com;www.ambysoft.com;www.enterpriseunifiedprocess.com;www.disciplinedagiledelivery.com;www.disciplinedagileconsortium.org">
+  <input type="hidden" name="hl" value="en">
+  <input type="hidden" name="safe" value="active">
+  <input type="hidden" name="oe" value="ISO-8859-1">
+  <input type="hidden" name="ie" value="ISO-8859-1">
+  <input type="hidden" name="forid" value="1">
+  <input type="hidden" name="client" value="pub-1563172974921293">
+  <input type="hidden" name="sitesearch" value="AgileData.org">
+  <input type="text" name="q" size="31" maxlength="255" value="">
+  <input type="submit" name="sa" value="Search"><font size="2"> 
+  <!-- SiteSearch Google -->
+
+  
+
+  
+<article>		The goals of this article are to overview fundamental
+data modeling skills that all developers should have, skills that can be applied
+on both traditional projects that take a serial approach to agile projects that
+take an evolutionary approach.&nbsp;My
+personal philosophy is that every IT professional should have a basic
+understanding of data modeling.&nbsp;They
+don’t need to be experts at data modeling, but they should be prepared to be
+involved in the creation of such a model, be able to read an existing data
+model, understand when and when not to create a data model, and appreciate
+fundamental data design techniques.&nbsp;This
+		article is a brief introduction to these skills.&nbsp;
+The primary audience for this article is application developers who need
+to gain an understanding of some of the critical activities performed by an
+Agile DBA.&nbsp;This understanding
+should lead to an appreciation of what Agile DBAs do and why they do them, and
+it should help to bridge the communication gap between these two roles. 
+		
+
+
+
+
+<h3>Table of Contents</h3>
+<ol>
+	<li><a href="http://www.agiledata.org/essays/dataModeling101.html#WhatIsDataModeling">What is data modeling?</a>
+	<ul>
+		<li><a href="http://www.agiledata.org/essays/dataModeling101.html#HowAreDataModelsUsed">How are data models used in practice?</a>
+        &nbsp;</li>
+		<li><a href="http://www.agiledata.org/essays/dataModeling101.html#ConceptualModels">What about conceptual models?</a> &nbsp;
+      	</li>
+		<li><a href="http://www.agiledata.org/essays/dataModeling101.html#Notations">Common data modeling notations</a> </li>
+	</ul></li>
+	<li><a href="http://www.agiledata.org/essays/dataModeling101.html#HowToDataModel">How to model data</a> &nbsp;
+    <ul>
+		<li>
+		<a href="http://www.agiledata.org/essays/dataModeling101.html#IdentifyDataEntities">Identify </a>
+		<a href="http://www.agiledata.org/essays/dataModeling101.html#IdentifyDataEntities">entity types</a></li>
+		<li>
+		<a href="http://www.agiledata.org/essays/dataModeling101.html#IdentifyAttributes">Identify attributes</a></li>
+		<li>
+		<a href="http://www.agiledata.org/essays/dataModeling101.html#ApplyDataNamingConventions">Apply naming
+        conventions</a></li>
+		<li>
+		<a href="http://www.agiledata.org/essays/dataModeling101.html#IdentifyRelationships">Identify relationships</a></li>
+		<li>
+		<a href="http://www.agiledata.org/essays/dataModeling101.html#ApplyDataModelPatterns">Apply data model patterns</a>
+		</li>
+		<li>
+		<a href="http://www.agiledata.org/essays/dataModeling101.html#AssignKeys">Assign keys</a> &nbsp;</li>
+		<li><a href="http://www.agiledata.org/essays/dataModeling101.html#Normalize">Normalize
+        to reduce data redundancy</a> </li>
+		<li><a href="http://www.agiledata.org/essays/dataModeling101.html#Denormalize">Denormalize
+        to improve performance</a> </li>
+	</ul></li>
+	<li><a href="http://www.agiledata.org/essays/dataModeling101.html#AgileDBModeling">Evolutionary/agile data modeling</a></li>
+	<li><a href="http://www.agiledata.org/essays/dataModeling101.html#BecomeABetterDataModeler">How
+    to become better at modeling data</a>&nbsp;</li>
+</ol>
+<br>
+<h3>1. <a name="WhatIsDataModeling">What is Data Modeling</a>?</h3>
+<p>Data modeling is the act of exploring data-oriented
+structures.&nbsp;Like other modeling
+artifacts data models can be used for a variety of purposes, from high-level
+conceptual models to physical data models.&nbsp;
+From the point of view of an object-oriented developer data modeling is
+conceptually similar to class modeling. With data modeling you identify entity types
+whereas with class modeling you identify classes.&nbsp;Data attributes are assigned to entity types just as you
+would assign attributes and operations to classes.&nbsp;
+There are associations between entities, similar to the associations
+between classes – relationships, inheritance, composition, and aggregation are
+all applicable concepts in data modeling.</p>
+<p>Traditional data modeling is different from class modeling because it focuses solely on
+data – class models allow you to explore both the behavior and data aspects of
+your domain, with a data model you can only explore data issues.&nbsp;
+Because of this focus data modelers have a tendency to be much better at
+getting the data “right" than object modelers.&nbsp;However, some people will 
+model database methods (stored procedures, stored functions, and triggers) when 
+they are physical data modeling.&nbsp;It depends on the situation of course, 
+but I personally think that this is a good idea and promote the concept in my
+<a href="http://www.agiledata.org/essays/umlDataModelingProfile.html">UML data 
+modeling profile</a> (more on this later).</p>
+<p>Although the focus of this article is data modeling, there are often
+alternatives to data-oriented artifacts (never forget Agile Modeling’s <a href="http://www.agilemodeling.com/principles.htm#MultipleModels">Multiple
+Models</a>  principle).&nbsp;For
+example, when it comes to conceptual modeling 
+<a href="http://www.agilemodeling.com/artifacts/ormDiagram.htm">ORM diagrams</a> aren’t your only
+option – In addition to LDMs it is quite common for people to create 
+<a href="http://www.agiledata.org/essays/agileDataModeling.html#InitialDomainModel">UML class
+diagrams</a> and even
+<a href="http://www.agilemodeling.com/artifacts/crcModel.htm">Class Responsibility Collaborator (CRC) cards</a> instead.&nbsp;
+In fact, my experience is that CRC cards are superior to ORM diagrams
+because it is very easy to get 
+<a href="http://www.agilemodeling.com/essays/activeStakeholderParticipation.htm">project stakeholders actively involved</a> in the
+creation of the model.&nbsp;Instead of a traditional, 
+<a href="http://www.agilemodeling.com/essays/businessAnalysts.htm">analyst</a>-led drawing session you can
+instead facilitate stakeholders through the creation of
+<a href="http://www.agilemodeling.com/artifacts/crcModel.htm">CRC cards</a>. 
+</p>
+<br>
+<h3>1.1 <a name="HowAreDataModelsUsed">How are Data Models Used</a> in Practice?</h3>
+Although methodology issues are covered <a href="http://www.agiledata.org/essays/dataModeling101.html#EvolutionaryModeling">later</a>, we need to discuss how data models can be used in practice to
+better understand them.&nbsp;&nbsp;You
+are likely to see three basic styles of data model:<p></p>
+<table border="0" width="100%" id="table12">
+	<tbody><tr>
+		<td>
+<ul>
+	<li>
+	<b>Conceptual data models</b>.&nbsp;These models, sometimes called domain models, are typically used to
+    explore domain concepts with project stakeholders.&nbsp;
+    On Agile teams high-level conceptual models are often created as part of 
+	your
+	
+	<a href="http://www.agilemodeling.com/essays/initialRequirementsModeling.htm">
+	initial requirements envisioning</a> efforts as they are used to explore the 
+	high-level static business structures and concepts.&nbsp;On traditional 
+	teams conceptual data models are often created as the precursor to LDMs or
+    as alternatives to LDMs.&nbsp; </li>
+	<li>
+	<b>Logical data models (LDMs)</b>.&nbsp;
+    LDMs are used to explore the domain concepts, and their
+    relationships, of your problem domain.&nbsp;
+    This could be done for the scope of a single project or for your
+    entire enterprise.&nbsp;LDMs depict
+    the logical entity types, typically referred to simply as entity types, the
+    data attributes describing those entities, and the relationships between the
+    entities.&nbsp;LDMs are rarely used on Agile projects although often are on 
+	traditional projects (where they rarely seem to add much value in practice).</li>
+	<li>
+	<b>Physical data models (PDMs)</b>.&nbsp;PDMs are used to design the internal schema of a database,
+    depicting the data tables, the data columns of those tables, and the
+    relationships between the tables.&nbsp;PDMs often prove to be useful on both 
+	Agile and traditional projects and as a result the focus of this article is on physical modeling.</li>
+</ul>
+		</td>
+		<td width="112">
+		<p align="right">
+	
+<b> 
+		<a href="http://www.amazon.com/exec/obidos/ASIN/1558604324/ambysoftinc" target="_blank">
+		<img src="./Data Modeling 101_files/1558604324.01.MZZZZZZZ.jpg" alt="Data and Databases" border="0"></a></b></p></td>
+	</tr>
+</tbody></table>
+Although LDMs and PDMs sound very similar, and they in fact
+are, the level of detail that they model can be significantly different.&nbsp;This is because the goals for each diagram is different
+– you can use an LDM to explore domain concepts with your stakeholders and the
+PDM to define your database design.&nbsp;<a href="http://www.agiledata.org/essays/dataModeling101.html#Figure1SimpleLDM">Figure 1</a> presents a simple LDM and <a href="http://www.agiledata.org/essays/dataModeling101.html#Figure2SimplePDM">Figure
+2</a> a simple PDM, both modeling the concept of customers and addresses as
+well as the relationship between them.&nbsp;
+Both
+diagrams apply the 
+<a href="http://www.amazon.com/exec/obidos/ASIN/0201416964/ambysoftinc">Barker notation</a>, <a href="http://www.agiledata.org/essays/dataModeling101.html#Notations">summarized below</a>.&nbsp;
+Notice how the PDM shows greater detail, including an associative table
+required to implement the association as well as the keys needed to maintain the
+relationships.&nbsp;More on these
+concepts later.&nbsp;PDMs should also
+reflect your organization’s database naming standards, in this case an
+abbreviation of the entity name is appended to each column name and an
+abbreviation for “Number" was consistently introduced.&nbsp;
+A PDM should also indicate the data types for the columns, such as
+integer and char(5).&nbsp;Although
+<a href="http://www.agiledata.org/essays/dataModeling101.html#Figure2SimplePDM">Figure 2</a> does not show them, lookup tables (also 
+called reference tables or description tables) for how the address is used as well
+as for states and countries are implied by the attributes <i>ADDR_USAGE_CODE</i>,
+<i>STATE_CODE</i>, and <i>COUNTRY_CODE</i>.<p></p>
+&nbsp;
+
+<p></p>
+<b><a name="Figure1SimpleLDM">Figure 1</a>. A simple
+logical data model.</b><p></p>
+
+<img border="0" src="./Data Modeling 101_files/dm101LDMCustomerAddress.gif" alt="Simple LDM">
+<p></p>
+&nbsp;
+
+<p></p>
+<b><a name="Figure2SimplePDM">Figure 2</a>. A simple
+physical data model.</b><p></p>
+
+<img border="0" src="./Data Modeling 101_files/dm101PDMCustomerAddress.gif" alt="Simple PDM"><p></p>
+
+<p></p>
+An important observation about Figures <a href="http://www.agiledata.org/essays/dataModeling101.html#Figure1SimpleLDM">1</a>
+and <a href="http://www.agiledata.org/essays/dataModeling101.html#Figure2SimplePDM">2</a> is that I’m not slavishly following
+Barker’s approach to naming relationships.&nbsp;
+For example, between <i>Customer</i> and <i>Address</i> there really
+should be two names “Each CUSTOMER may be located in one or more ADDRESSES"
+and “Each ADDRESS may be the site of one or more CUSTOMERS".&nbsp;
+Although these names explicitly define the relationship I personally
+think that they’re visual noise that clutter the diagram.&nbsp;
+I prefer simple names such as “has" and then trust my readers to
+interpret the name in each direction.&nbsp;I’ll
+only add more information where it’s needed, in this case I think that it
+isn’t.&nbsp;However, a significant
+advantage of describing the names the way that Barker suggests is that it’s a
+good test to see if you actually understand the relationship – if you can’t
+name it then you likely don’t understand it.
+
+
+<p></p>
+Data models can be used effectively at both the enterprise
+level and on projects.&nbsp;Enterprise
+architects will often create one or more high-level LDMs that depict the data
+structures that support your enterprise, models typically referred to as
+enterprise data models or enterprise information models.&nbsp;
+An enterprise data model is one of several views that your
+organization’s 
+<a href="http://www.enterpriseunifiedprocess.com/essays/enterpriseArchitecture.html">enterprise architects</a> 
+may choose to maintain and support – other views
+may explore your network/hardware infrastructure, your organization structure,
+your software infrastructure, and your business processes (to name a few).&nbsp;
+Enterprise data models provide information that a project team can use
+both as a set of constraints as well as important insights into the structure of
+their system.&nbsp;<p></p>
+Project teams will typically create LDMs as a primary
+analysis artifact when their implementation environment is predominantly
+procedural in nature, for example they are using structured COBOL as an
+implementation language.&nbsp;LDMs are 
+also a good choice when a project is data-oriented in nature, perhaps a 
+<a href="http://www.agiledata.org/essays/dataWarehousingBestPractices.html">data
+warehouse</a> or reporting system is being developed (having said that, 
+experience seems to show that usage-centered approaches appear to work even 
+better).
+&nbsp;However LDMs are often a poor choice when a project team is using
+object-oriented or component-based technologies because the developers would
+rather work with UML diagrams or when the project is not
+data-oriented in nature.&nbsp;As 
+<a href="http://www.ambysoft.com/books/agileModeling.html">Agile
+Modeling </a>advises, 
+<a href="http://www.agilemodeling.com/practices.htm#ApplyTheRightArtifacts">apply 
+the right artifact(s)</a> for the
+job.&nbsp;Or, as your grandfather likely advised you, use the
+right tool for the job.&nbsp;It's important to note that traditional approaches 
+to <a href="http://www.agiledata.org/essays/masterDataManagement.html">
+			Master Data Management (MDM)</a> will often motivate the creation 
+and maintenance of detailed LDMs, an effort that is rarely justifiable in 
+practice when you consider the total cost of ownership (TCO) when calculating 
+the return on investment (ROI) of those sorts of efforts.<p></p>
+When a 
+<a href="http://www.agiledata.org/essays/mappingObjects.html">relational database</a> is used for data storage project
+teams are best advised to create a PDMs to model its internal schema.&nbsp;
+My experience is that a PDM is often one of the critical design artifacts
+for business application development projects.&nbsp;<p></p>
+&nbsp;<p></p>
+<h3>2.2. What About <a name="ConceptualModels">Conceptual
+Models</a>?</h3>
+<p><a href="http://www.amazon.com/exec/obidos/ASIN/1558606726/ambysoftinc">
+Halpin
+(2001) </a>points out that many data professionals prefer to create an 
+<a href="http://www.agilemodeling.com/artifacts/ormDiagram.htm">Object-Role
+Model (ORM)</a>, an example is depicted in <a href="http://www.agiledata.org/essays/dataModeling101.html#Figure3ConceptualModel">Figure
+3</a>, instead of an LDM for a conceptual model.&nbsp;
+The advantage is that the notation is very simple, something your project
+stakeholders can quickly grasp, although the disadvantage is that the models
+become large very quickly.&nbsp;ORMs
+enable you to first explore actual data examples instead of simply jumping to a
+potentially incorrect abstraction – for example <a href="http://www.agiledata.org/essays/dataModeling101.html#Figure3ConceptualModel">Figure
+3</a> examines the relationship between customers and addresses in detail.&nbsp;
+&nbsp;For more information about ORM, visit <a href="http://www.orm.net/">www.orm.net</a>.&nbsp;</p>
+&nbsp;<p></p>
+<b><a name="Figure3ConceptualModel">Figure
+3. A simple Object-Role Model</a>.</b><p></p>
+<p align="center">
+<img border="0" src="./Data Modeling 101_files/dm101ConceptualModel.gif"></p>
+<table border="0" width="100%" id="table11">
+	<tbody><tr>
+		<td>My experience is that people will capture information
+in the best place that they know.&nbsp;As
+a result I typically discard ORMs after I’m finished with them.&nbsp;
+I sometimes user ORMs to explore the domain with project stakeholders but
+later replace them with a more traditional artifact such as an LDM, a class
+diagram, or even a PDM.&nbsp;As a 
+<a href="http://www.agilemodeling.com/essays/generalizingSpecialists.htm">
+generalizing specialist</a>, someone with one or more specialties who also strives to gain
+general skills and knowledge, this is an easy decision for me to make; I know
+that this information that I’ve just “discarded" will be captured in
+another artifact – a model, the tests, or even the code – that I understand.&nbsp;
+A specialist who only understands a limited number of artifacts and
+therefore “hands-off" their work to other specialists doesn’t have this as
+an option.&nbsp;Not only are they
+tempted to keep the artifacts that they create but also to invest even more time
+to enhance the artifacts.&nbsp;Generalizing specialists are more likely than specialists to
+		
+<a href="http://www.agilemodeling.com/principles.htm#TravelLight">travel light</a>.</td>
+		<td width="112">
+		
+<b><a href="http://www.ambysoft.com/books/theObjectPrimer.html">
+		<img src="./Data Modeling 101_files/0521540186.01.MZZZZZZZ.jpg" alt="The Object Primer 3rd Edition: Agile Model Driven Development (AMDD) with UML 2" border="0" width="106" height="140" align="right"></a></b></td>
+	</tr>
+</tbody></table>
+<br>
+<h3>2.3. Common Data Modeling <a name="Notations">Notations</a></h3>
+<p><a href="http://www.agiledata.org/essays/dataModeling101.html#Figure3Notation">Figure 4</a> presents a
+summary of the syntax of four common data modeling notations: Information
+Engineering (IE), Barker, IDEF1X, and the 
+<a href="http://www.agilemodeling.com/essays/umlDiagrams.htm">Unified Modeling Language (UML)</a>.&nbsp;
+This diagram isn’t meant to be comprehensive, instead its goal is to provide a
+basic overview. &nbsp;Furthermore, for the sake of brevity I wasn’t able to depict
+the highly-detailed approach to relationship naming that Barker suggests.&nbsp;Although I provide a brief description of each notation in <a href="http://www.agiledata.org/essays/dataModeling101.html#Table1">Table
+1</a> I highly suggest David Hay’s paper <a href="http://www.essentialstrategies.com/publications/modeling/compare.htm">A
+Comparison of Data Modeling Techniques</a> as he goes into greater detail
+than I do.&nbsp;</p>
+&nbsp;<p></p>
+<b><a name="Figure4Notation">Figure 4</a>. Comparing the
+syntax of common data modeling notations.</b><p></p>
+
+<img border="0" src="./Data Modeling 101_files/dm101NotationSummary.gif" alt="Data modeling notation summary"><p></p>
+&nbsp;<p></p>
+<b><a name="Table1">Table 1</a>. Discussing common data
+modeling notations.</b><p></p>
+<table border="1" cellspacing="0" cellpadding="0">
+  <tbody><tr>
+    <td valign="top">
+      <p class="TCH"><b>Notation
+		
+      
+      </b></p>
+    </td>
+    <td valign="top">
+      <p class="TCH"><b>Comments
+		
+      
+      </b></p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>IE
+      
+      </p>
+    </td>
+    <td>
+      <p>The 
+		<a href="http://www.amazon.com/exec/obidos/ASIN/0201416549/ambysoftinc">IE notation (Finkelstein 1989)</a> is simple and easy to
+      read, and is well suited for high-level logical and enterprise data
+      modeling.&nbsp;The only drawback
+      of this notation, arguably an advantage, is that it does not support the
+      identification of attributes of an entity.&nbsp;The assumption is that the attributes will be modeled
+      with another diagram or simply described in the supporting documentation.
+      
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>Barker
+      
+      </p>
+    </td>
+    <td>
+      <p>The 
+		<a href="http://www.amazon.com/exec/obidos/ASIN/0201416964/ambysoftinc">
+		Barker notation</a> is one of the more popular ones,
+      it is supported by Oracle’s toolset, and is well suited for all types of
+      data models.&nbsp;It’s approach
+      to subtyping can become clunky with hierarchies that go several levels
+      deep. 
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>IDEF1X
+      
+      </p>
+    </td>
+    <td>
+      <p>This notation is overly complex.&nbsp;
+      It was originally intended for physical modeling but
+      has been misapplied for logical modeling as well.&nbsp;Although popular within some U.S. government agencies, particularly
+      the Department of Defense (DoD), this notation has been all but abandoned
+      by everyone else.&nbsp;Avoid it if
+      you can. 
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p>UML
+      
+      </p>
+    </td>
+    <td>
+      <p>This is not an official data modeling notation (yet).&nbsp;
+      Although several suggestions for a 
+		<a href="http://www.agiledata.org/essays/umlDataModelingProfile.html">data modeling profile for the
+      UML</a> exist, none are complete and more importantly are not “official" UML
+      yet.&nbsp;However, the Object Management Group (OMG) in December 2005 
+		announced an RFP for data-oriented models.</p>
+    </td>
+  </tr>
+</tbody></table>
+&nbsp;<p></p>
+<h3>3. <a name="HowToDataModel"> How to Model Data</a></h3>
+It is critical for an application developer to have a grasp
+of the fundamentals of data modeling so they can not only read data models but
+also work effectively with Agile DBAs who are responsible for the
+data-oriented aspects of your project.&nbsp;Your
+goal reading this section is not to learn how to become a data modeler, instead
+it is simply to gain an appreciation of what is involved.<p></p>
+<table border="0" width="100%" id="table13">
+	<tbody><tr>
+		<td>
+		The following tasks are performed in an iterative manner:<p></p>
+<ul>
+  <li>
+    <a href="http://www.agiledata.org/essays/dataModeling101.html#IdentifyDataEntities">Identify entity types</a></li>
+  <li>
+    <a href="http://www.agiledata.org/essays/dataModeling101.html#IdentifyAttributes">Identify attributes</a></li>
+  <li>
+    <a href="http://www.agiledata.org/essays/dataModeling101.html#ApplyDataNamingConventions">Apply naming
+    conventions</a></li>
+  <li>
+    <a href="http://www.agiledata.org/essays/dataModeling101.html#IdentifyRelationships">Identify relationships</a></li>
+  <li>
+    <a href="http://www.agiledata.org/essays/dataModeling101.html#ApplyDataModelPatterns">Apply data model patterns</a></li>
+  <li>
+    <a href="http://www.agiledata.org/essays/dataModeling101.html#AssignKeys">Assign keys</a></li>
+  <li>
+    <a href="http://www.agiledata.org/essays/dataModeling101.html#Normalize">Normalize to reduce data redundancy</a></li>
+  <li>
+    <a href="http://www.agiledata.org/essays/dataModeling101.html#Denormalize">Denormalize to improve performance</a></li>
+</ul>
+		<p>&nbsp;</p></td>
+		<td width="112">
+		<p align="right">
+		
+		
+<b> 
+		<a href="http://www.amazon.com/exec/obidos/ASIN/0471052906/ambysoftinc" target="_blank">
+		<img src="./Data Modeling 101_files/0471052906.01.MZZZZZZZ.jpg" alt="The Data Modeling Handbook" border="0"></a></b></p></td>
+	</tr>
+</tbody></table>
+<table border="0" width="71%" id="table2">
+	<tbody><tr>
+		<td width="123">&nbsp;</td>
+		<td>
+		<table border="1" width="100%" bgcolor="#FFFFCC" id="table3">
+			<tbody><tr>
+				<td>
+				<p align="center">Very good practical books about data modeling include 
+				 
+				<a href="http://www.amazon.com/exec/obidos/ASIN/1558604324/ambysoftinc">Joe
+Celko’s Data &amp; Databases</a> and  
+				<a href="http://www.amazon.com/exec/obidos/ASIN/0130804509/ambysoftinc">Data
+Modeling for Information Professionals</a> as they both focus
+on practical issues with data modeling.&nbsp;
+				 
+				<a href="http://www.amazon.com/exec/obidos/ASIN/0471052906/ambysoftinc">The
+Data Modeling Handbook</a> and  <a href="http://www.amazon.com/exec/obidos/ASIN/0932633293/ambysoftinc">Data
+Model Patterns</a> are both excellent resources once you’ve
+mastered the fundamentals.&nbsp;
+				 <a href="http://www.amazon.com/exec/obidos/ASIN/0201787229/ambysoftinc">An
+Introduction to Database Systems</a> is a good academic treatise
+for anyone wishing to become a data specialist.
+				
+
+				</p></td>
+			</tr>
+		</tbody></table>
+		</td>
+	</tr>
+</tbody></table>
+&nbsp;<p></p>
+<h3>3.1 <a name="IdentifyDataEntities">Identify Entity Types</a></h3>
+An entity type, also simply called entity (not exactly 
+accurate terminology, but very common in practice), is similar
+conceptually to object-orientation’s concept of a class – an entity type represents a collection of similar objects.&nbsp;
+An entity type could represent a collection of people, places, things, events,
+or concepts.&nbsp;Examples of entities
+in an order entry system would include <i>Customer</i>, <i>Address</i>, <i>Order</i>,
+<i>Item</i>, and <i>Tax</i>.&nbsp;If you
+were class modeling you would expect to discover classes with the exact same
+names.&nbsp;However, the difference
+between a class and an entity type is that classes have both data and behavior
+whereas entity types just have data.&nbsp;<p></p>
+Ideally an entity should be <a href="http://www.agiledata.org/essays/dataModeling101.html#Normalize">normal</a>, the data modeling
+world’s version of cohesive.&nbsp;A
+normal entity depicts one concept, just like a cohesive class models one
+concept.&nbsp;For example, customer and
+order are clearly two different concepts; therefore it makes sense to model them
+as separate entities.&nbsp;<p></p>
+&nbsp;
+
+<p></p>
+<h3>3.2 <a name="IdentifyAttributes">Identify Attributes</a></h3>
+Each entity type will have one or more data attributes.&nbsp;
+For example, in <a href="http://www.agiledata.org/essays/dataModeling101.html#Figure1SimpleLDM">Figure 1</a> you saw that the <i>Customer</i> entity has
+attributes such as <i>First Name</i> and <i>Surname</i> and in Figure 2 that the
+<i>TCUSTOMER </i>table had corresponding data columns <i>CUST_FIRST_NAME</i> and
+<i>CUST_SURNAME</i> (a column is the implementation of a data attribute within a
+relational database).&nbsp;<p></p>
+Attributes should also be cohesive from the point of view
+of your domain, something that is often a judgment call. – in Figure 1 we
+decided that we wanted to model the fact that people had both first and last
+names instead of just a name (e.g. “Scott" and “Ambler" vs. “Scott
+Ambler") whereas we did not distinguish between the sections of an American
+zip code (e.g. 90210-1234-5678).&nbsp;Getting
+the level of detail right can have a significant impact on your development and
+maintenance efforts.&nbsp;Refactoring a
+single data column into several columns can be difficult, database
+refactoring is described in detail in <a href="http://www.agiledata.org/essays/databaseRefactoring.html">Database
+Refactoring</a>, although over-specifying an attribute (e.g. having three attributes for zip code when you only
+needed one) can result in overbuilding your system and hence you incur greater
+development and maintenance costs than you actually needed.<p></p>
+&nbsp;
+
+<p></p>
+<h3>3.3 <a name="ApplyDataNamingConventions">Apply Data Naming Conventions</a></h3>
+Your organization should have standards and guidelines
+applicable to data modeling, something you should be able to obtain from your
+enterprise administrators (if they don’t exist you should lobby to have some
+put in place).&nbsp;These guidelines
+should include naming conventions for both logical and physical modeling, the
+logical naming conventions should be focused on human readability whereas the
+physical naming conventions will reflect technical considerations.
+&nbsp;You can clearly see that different naming conventions were
+applied in Figures <a href="http://www.agiledata.org/essays/dataModeling101.html#Figure1SimpleLDM">1</a> and 
+<a href="http://www.agiledata.org/essays/dataModeling101.html#Figure2SimplePDM">2</a>.&nbsp;<p></p>
+As you saw in
+<a href="http://www.agilemodeling.com/essays/introductionToAM.htm">Introduction
+to Agile Modeling</a>, AM includes the
+<a href="http://www.agilemodeling.com/practices.htm#ApplyModelingStandards">Apply
+Modeling Standards</a> practice.&nbsp;The
+basic idea is that developers should agree to and follow a common set of
+modeling standards on a software project. Just like there is value in following
+common coding conventions, clean code that follows your chosen coding guidelines
+is easier to understand and evolve than code that doesn't, there is similar
+value in following common modeling conventions.&nbsp;<p></p>
+&nbsp;<p></p>
+<h3>3.4 <a name="IdentifyRelationships">Identify Relationships</a></h3>
+In the real world entities have relationships with other entities.&nbsp;
+For example, customers PLACE orders, customers LIVE AT addresses, and
+line items ARE PART OF orders.&nbsp;Place,
+live at, and are part of are all terms that define relationships between
+entities.
+&nbsp;The relationships between entities are conceptually identical
+to the relationships (associations) between objects.
+&nbsp;<p></p>
+<a href="http://www.agiledata.org/essays/dataModeling101.html#Figure5IdentifyRelationships">Figure 5</a> depicts a
+partial LDM for an online ordering system.&nbsp;
+The first thing to notice is the various styles applied to relationship
+names and roles – different relationships require different approaches.&nbsp;
+For example the relationship between <i>Customer</i> and <i>Order</i> has
+two names, <i>places</i> and <i>is placed by</i>, whereas the relationship
+between <i>Customer</i> and <i>Address</i> has one.&nbsp;
+In this example having a second name on the relationship, the idea being
+that you want to specify how to read the relationship in each direction, is
+redundant – you’re better off to find a clear wording for a single
+relationship name, decreasing the clutter on your diagram.&nbsp;
+Similarly you will often find that by specifying the roles that an entity
+plays in a relationship will often negate the need to give the relationship a
+name (although some 
+<a href="http://www.agilemodeling.com/essays/simpleTools.htm">CASE tools</a> may inadvertently force you to do this).&nbsp;
+For example the role of <i>billing address</i> and the label <i>billed to</i>
+are clearly redundant, you really only need one.&nbsp;
+For example the role <i>part of</i> that <i>Line Item</i> has in its
+relationship with <i>Order</i> is sufficiently obvious without a relationship
+name.<p></p>
+<b><a name="Figure5IdentifyRelationships">Figure 5</a>. A
+logical data model (Information Engineering notation).</b><p></p>
+<p align="center">
+<img border="0" src="./Data Modeling 101_files/dm101IdentifyRelationships.gif" alt="Identifying relationships"></p>
+&nbsp;<p></p>
+You also need to identify the cardinality and optionality of a
+relationship (the <a href="http://www.agilemodeling.com/essays/umlDiagrams.htm">UML</a> combines the concepts of optionality and cardinality into
+the single concept of multiplicity).&nbsp;Cardinality
+represents the concept of “how many" whereas optionality represents the
+concept of “whether you must have something." For example, it is not enough
+to know that customers place orders.
+&nbsp;How many orders can a customer place?
+&nbsp;None, one, or several?&nbsp;Furthermore,
+relationships are two-way streets: not only do customers place orders, but
+orders are placed by customers.
+&nbsp;This leads to questions like: how many customers can be
+enrolled in any given order and is it possible to have an order with no customer
+involved?&nbsp;<a href="http://www.agiledata.org/essays/dataModeling101.html#Figure5IdentifyRelationships">Figure
+5</a> shows that customers place zero or more orders and that any given order is
+placed by one customer and one customer only.&nbsp;
+It also shows that a customer lives at one or more addresses and that any
+given address has zero or more customers living at it.<p></p>
+Although the UML distinguishes between different types of
+relationships – associations, inheritance, aggregation, composition, and
+dependency – data modelers often aren’t as concerned with this issue as much
+as object modelers are.&nbsp;Subtyping,
+one application of inheritance, is often found in data models, an example of
+which is the <i>is a</i> relationship between <i>Item</i> and it’s two “sub
+entities" <i>Service</i> and <i>Product</i>.&nbsp;&nbsp;
+Aggregation and composition are much less common and typically must be
+implied from the data model, as you see with the <i>part of</i> role that <i>Line
+Item</i> takes with <i>Order</i>.&nbsp;UML
+dependencies are typically a software construct and therefore wouldn’t appear
+on a data model, unless of course it was a very highly detailed physical model
+that showed how views, triggers, or stored procedures depended on other aspects 
+of the database schema.<p></p>
+&nbsp;<p></p>
+        <h3>3.5 <a name="ApplyDataModelPatterns">Apply Data Model Patterns</a></h3>
+        <table border="0" width="100%" id="table14">
+			<tbody><tr>
+				<td>Some data modelers will apply common data model
+        patterns, David Hay’s book 
+		<a href="http://www.amazon.com/exec/obidos/ASIN/0932633293/ambysoftinc">Data
+Model Patterns</a><i>  </i> is the best reference on the subject, just as
+        object-oriented developers will apply analysis patterns (<a href="http://www.amazon.com/exec/obidos/ASIN/0201895420/ambysoftinc">Fowler 1997</a>; 
+				 
+		<a href="http://www.ambysoft.com/books/buildingObjectApplications.html">Ambler
+        1997</a>) and 
+		 
+		<a href="http://www.amazon.com/exec/obidos/ASIN/0201633612/ambysoftinc">design patterns (Gamma et al. 1995</a>).&nbsp;
+        Data model patterns are conceptually closest to analysis patterns
+        because they describe solutions to common domain issues.&nbsp;
+        Hay’s book is a very good reference for anyone involved in
+        analysis-level modeling, even when you’re taking an object approach
+        instead of a data approach because his patterns model business
+        structures from a wide variety of business domains.
+        </td>
+				<td width="112">
+				<p align="right">
+		
+		
+<b> 
+				<a href="http://www.amazon.com/exec/obidos/ASIN/0932633293/ambysoftinc" target="_blank">
+		<img src="./Data Modeling 101_files/0932633293.01.MZZZZZZZ.jpg" alt="Data Model Patterns" border="0"></a></b></p></td>
+			</tr>
+</tbody></table>
+        &nbsp;
+        <h3>3.6 <a name="AssignKeys">Assign Keys</a></h3>
+There are two fundamental strategies for assigning keys to tables.&nbsp;
+First, you could assign a natural key which is one or more existing data
+attributes that are unique to the business concept.&nbsp;
+	The <i>Customer</i> table of <a href="http://www.agiledata.org/essays/dataModeling101.html#Figure6UMLCustomerAddress">Figure 6</a> there was two candidate keys, in this case
+<i>CustomerNumber</i>
+and <i>SocialSecurityNumber</i>.&nbsp;Second, 
+you could introduce a new column, called a surrogate key, 
+	which is a key that has no business
+meaning.&nbsp;An example of which is the <i>AddressID</i>
+column of the <i>Address</i> table in 
+	<a href="http://www.agiledata.org/essays/dataModeling101.html#Figure6UMLCustomerAddress">Figure
+6</a>.&nbsp;Addresses don’t have an
+“easy" natural key because you would need to use all of the columns of the 
+	<i>Address</i> table to form a key for itself (you might be able to get 
+away with just the combination of <i>Street</i> and <i>ZipCode</i> depending on 
+your problem domain), therefore introducing a
+surrogate key is a much better option in this case.
+ <p></p>
+        &nbsp;<b><a name="Figure6UMLCustomerAddress">Figure 6</a>.
+        Customer and Address revisited (<a href="http://www.agiledata.org/essays/umlDataModelingProfile.html">UML
+        notation</a>).</b>
+        <p align="center"><img border="0" src="./Data Modeling 101_files/dm101UMLCustomerAddress.gif">
+&nbsp;</p>
+Let's consider <a href="http://www.agiledata.org/essays/dataModeling101.html#Figure6UMLCustomerAddress">Figure 6</a> 
+in more detail.&nbsp;Figure 6 presents an
+alternative design to that presented in <a href="http://www.agiledata.org/essays/dataModeling101.html#Figure2SimplePDM">Figure 2</a>,
+a different naming convention was adopted and the model itself is more
+extensive.&nbsp;In Figure 6 the <i>Customer</i>
+table has the <i>CustomerNumber</i> column as
+its primary key and <i>SocialSecurityNumber</i>
+as an alternate key.&nbsp;This indicates
+that the preferred way to access customer information is through the value of a
+person’s customer number although your software can get at the same
+information if it has the person’s social security number.&nbsp;
+The <i>CustomerHasAddress</i> table
+has a composite primary key, the combination of <i>CustomerNumber</i> and <i>AddressID</i>.&nbsp;
+A foreign key is one or more attributes in an entity type that represents
+a key, either primary or secondary, in another entity type.&nbsp;
+Foreign keys are used to maintain relationships between rows.&nbsp;
+For example, the relationships between rows in the <i>CustomerHasAddress</i> table and the <i>Customer</i> table is maintained by the <i>CustomerNumber</i> column within the <i>CustomerHasAddress</i> table.&nbsp;The
+interesting thing about the <i>CustomerNumber</i>
+column is the fact that it is part of the primary key for <i>CustomerHasAddress</i> as well as the foreign key to the <i>Customer</i>
+table.&nbsp;Similarly, the <i>AddressID</i> column is part of the primary key of <i>CustomerHasAddress</i> as well as a foreign key to the <i>Address</i>
+table to maintain the relationship with rows of <i>Address</i>.<p></p>
+
+Although the "natural vs. surrogate" debate is one of the great religious 
+issues within the data community, the fact is that neither strategy is perfect 
+and you'll discover that in practice (as we see in 
+<a href="http://www.agiledata.org/essays/dataModeling101.html#Figure6UMLCustomerAddress">Figure 6</a>
+) sometimes it makes sense to use natural keys and sometimes it makes sense 
+to use surrogate keys.&nbsp;In 
+<a href="http://www.agiledata.org/essays/keys.html">Choosing a Primary Key: 
+Natural or Surrogate?</a> I describe the relevant issues in detail.<p></p>
+        <p>&nbsp;</p><h3>3.7 <a name="Normalize">Normalize</a>
+        to Reduce Data Redundancy</h3>
+<table border="0" width="100%" id="table15">
+	<tbody><tr>
+		<td><a href="http://www.agiledata.org/essays/dataNormalization.html">Data normalization</a> is a process in which data attributes within a
+data model are organized to increase the cohesion of entity types.&nbsp;
+In other words, the goal of data normalization is to reduce and even
+eliminate data redundancy, an important consideration for application developers because
+it is incredibly difficult to stores objects in a relational database that
+maintains the same information in several places.&nbsp;
+		
+<a href="http://www.agiledata.org/essays/dataModeling101.html#Table2DataNormalizationRules">Table 2</a> summarizes the three
+most common normalization rules describing how to put entity types into a
+series of increasing levels of normalization. Higher levels of data
+normalization (Date 2000) are beyond the scope of this book.&nbsp;
+With respect to terminology, a data schema is considered to be at the
+level of normalization of its least normalized entity type.&nbsp;
+For example, if all of your entity types are at second normal form (2NF)
+or higher then we say that your data schema is at 2NF.</td>
+		<td width="112">
+		<p align="right">
+		
+		
+<b> 
+		<a href="http://www.amazon.com/exec/obidos/ASIN/0130804509/ambysoftinc" target="_blank">
+		<img src="./Data Modeling 101_files/0130804509.01.MZZZZZZZ.jpg" alt="Data Modeling for Information Professionals" border="0"></a></b></p></td>
+	</tr>
+</tbody></table>
+<b><a name="Table2DataNormalizationRules">Table 2. Data
+Normalization Rules</a>.</b><p></p>
+<table border="1" cellspacing="0" cellpadding="0">
+  <tbody><tr>
+    <td valign="top">
+      <b>Level</b>
+    </td>
+    <td valign="top">
+      <b>Rule</b>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      
+		<a href="http://www.agiledata.org/essays/dataNormalization.html#1NF">First normal form (1NF)</a>
+    </td>
+    <td valign="top">
+      An entity type is in 1NF when it contains no repeating groups
+      of data.
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      
+		<a href="http://www.agiledata.org/essays/dataNormalization.html#2NF">Second normal form (2NF)</a>
+    </td>
+    <td valign="top">
+      An entity type is in 2NF when it is in 1NF and when all of
+      its non-key attributes are fully dependent on its primary key.&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      
+		<a href="http://www.agiledata.org/essays/dataNormalization.html#3NF">Third normal form (3NF)</a>
+     
+    </td>
+    <td valign="top">
+      An entity type is in 3NF when it is in 2NF and when all of
+      its attributes are directly dependent on the primary key.
+    </td>
+  </tr>
+</tbody></table>
+&nbsp;<p></p>
+<a href="http://www.agiledata.org/essays/dataModeling101.html#Figure7Order0NF">Figure
+7</a> depicts a database schema in ONF whereas <a href="http://www.agiledata.org/essays/dataModeling101.html#Figure8OrderNormalized">
+Figure 8</a> depicts a normalized schema in 3NF.&nbsp;Read the
+<a href="http://www.agiledata.org/essays/dataNormalization.html">Introduction to 
+Data Normalization</a> essay for details.&nbsp;<p></p>
+Why data normalization?&nbsp;
+The advantage of having a highly normalized data schema is that
+information is stored in one place and one place only, reducing the possibility
+of inconsistent data.&nbsp;Furthermore,
+highly-normalized data schemas in general are closer conceptually to
+object-oriented schemas because the object-oriented goals of promoting high
+cohesion and loose coupling between classes results in similar solutions (at
+least from a data point of view).&nbsp;This
+generally makes it easier to 
+<a href="http://www.agiledata.org/essays/mappingObjects.html">map your objects to your data schema</a>.&nbsp;
+Unfortunately, normalization usually comes at a performance cost.&nbsp;
+With the data schema of <a href="http://www.agiledata.org/essays/dataModeling101.html#Figure7Order0NF">Figure 7</a> all the
+data for a single order is stored in one row (assuming orders of up to nine
+order items), making it very easy to access.&nbsp;
+With the data schema of <a href="http://www.agiledata.org/essays/dataModeling101.html#Figure7Order0NF">Figure 7</a> you could
+quickly determine the total amount of an order by reading the single row from
+the <i>Order0NF</i> table.&nbsp;
+To do so with the data schema of <a href="http://www.agiledata.org/essays/dataModeling101.html#Figure8OrderNormalized">Figure
+8</a> you would need to read data from a row in the <i>Order</i>
+table, data from all the rows from the <i>OrderItem</i>
+table for that order and data from the corresponding rows in the <i>Item</i>
+table for each order item.&nbsp;For this
+query, the data schema of <a href="http://www.agiledata.org/essays/dataModeling101.html#Figure7Order0NF">Figure 7</a> very likely
+provides better performance.<p></p>
+&nbsp;<p></p>
+<b><a name="Figure7Order0NF">Figure 7</a>. An Initial Data
+Schema for Order (<a href="http://www.agiledata.org/essays/umlDataModelingProfile.html">UML
+Notation</a>).</b><p></p>
+
+<img border="0" src="./Data Modeling 101_files/dm101Order0NF.gif" alt="Order in 0NF"><p></p>
+&nbsp;<p></p>
+<b><a name="Figure8OrderNormalized">Figure 8. A normalized 
+schema</a> in 3NF (<a href="http://www.agiledata.org/essays/umlDataModelingProfile.html">UML
+Notation</a>).</b><p></p>
+
+<img border="0" src="./Data Modeling 101_files/dm101OrderNormalized.gif" alt="Order Fully Normalized"><p></p>
+
+
+
+
+<p></p>
+In class modeling, there is a similar concept called
+<a href="http://www.agiledata.org/essays/classNormalization.html">Class 
+Normalization</a> although that is beyond the scope of this article.<br>
+<h3>3.8 <a name="Denormalize">Denormalize</a> to Improve Performance</h3>
+Normalized data schemas, when put into production, often
+suffer from performance problems.&nbsp;This
+makes sense – the rules of data normalization focus on reducing data
+redundancy, not on improving performance of data access.&nbsp;
+An important part of data modeling is to denormalize portions of your
+data schema to improve database access times.&nbsp;
+For example, the data model of <a href="http://www.agiledata.org/essays/dataModeling101.html#Figure12DenormalizedOrder">Figure
+9</a> looks nothing like the normalized schema of 
+<a href="http://www.agiledata.org/essays/dataModeling101.html#Figure8OrderNormalized">Figure
+8</a>.&nbsp;To understand why the
+differences between the schemas exist you must consider the performance needs of
+the application.&nbsp;The primary goal
+of this system is to process new orders from online customers as quickly as
+possible.&nbsp;To do this customers need
+to be able to search for items and add them to their order quickly, remove items
+from their order if need be, then have their final order totaled and recorded
+quickly.&nbsp;The secondary goal of the
+system is to the process, ship, and bill the orders afterwards.<p></p>
+&nbsp;
+
+<p></p>
+<b><a name="Figure12DenormalizedOrder">Figure 9. A Denormalized Order </a>Data Schema (<a href="http://www.agiledata.org/essays/umlDataModelingProfile.html">UML
+notation</a>).</b><p></p>
+
+<img border="0" src="./Data Modeling 101_files/dm101OrderDenormalized.gif" alt="Order Denormalized">
+
+<p></p>
+&nbsp;<p></p>
+To denormalize the data schema the following decisions were
+made:<p></p>
+<ol>
+  <li>
+    To support quick searching of item information the <i>Item</i>
+    table was left alone.</li>
+  <li>
+    To support the addition and removal of order items to
+    an order the concept of an <i>OrderItem</i>
+    table was kept, albeit split in two to support outstanding orders and
+    fulfilled orders.&nbsp;New order
+    items can easily be inserted into the <i>OutstandingOrderItem</i>
+    table, or removed from it, as needed.</li>
+  <li>
+    To support order processing the <i>Order</i> and <i>OrderItem</i> tables
+    were reworked into pairs to handle outstanding and fulfilled orders
+    respectively.&nbsp;Basic order
+    information is first stored in the <i>OutstandingOrder</i>
+    and <i>OutstandingOrderItem</i> tables
+    and then when the order has been shipped and paid for the data is then
+    removed from those tables and copied into the <i>FulfilledOrder</i>
+    and <i>FulfilledOrderItem</i> tables
+    respectively.&nbsp;Data access time
+    to the two tables for outstanding orders is reduced because only the active
+    orders are being stored there.&nbsp;On
+    average an order may be outstanding for a couple of days, whereas for
+    financial reporting reasons may be stored in the fulfilled order tables for
+    several years until archived.&nbsp;There
+    is a performance penalty under this scheme because of the need to delete
+    outstanding orders and then resave them as fulfilled orders, clearly
+    something that would need to be processed as a transaction.&nbsp;</li>
+  <li>
+    The contact information for the person(s) the order is
+    being shipped and billed to was also denormalized back into the <i>Order</i> table, reducing the time it takes to write an order to the
+    database because there is now one write instead of two or three.&nbsp;
+    The retrieval and deletion times for that data would also be
+    similarly improved.</li>
+</ol>
+Note that if your initial, normalized data design meets the
+performance needs of your application then it is fine as is.&nbsp;
+Denormalization should be resorted to only when performance testing shows
+that you have a problem with your objects and subsequent profiling reveals that
+you need to improve database access time.&nbsp;As
+my grandfather said, if it ain’t broke don’t fix it.<p></p>
+<br>
+<h3>5. Evolutionary/<a name="AgileDataModeling">Agile Data Modeling</a></h3>
+<p>Evolutionary data modeling is data modeling performed in an iterative and 
+incremental manner.&nbsp;The article <a href="http://www.agiledata.org/essays/evolutionaryDevelopment.html">Evolutionary
+Development</a> explores evolutionary software development in greater detail.&nbsp;
+Agile data modeling is evolutionary data modeling done in a collaborative 
+manner.&nbsp;&nbsp;The article
+<a href="http://www.agiledata.org/essays/agileDataModeling.html">Agile Data 
+Modeling: From Domain Modeling to Physical Modeling</a> works through a case 
+study which shows how to take an agile approach to data modeling.
+</p>
+<p>Although you wouldn’t think it, data modeling can be one of the most 
+challenging tasks that an Agile DBA can be involved with on an agile software 
+development project.&nbsp;Your approach to data modeling will often be at the 
+center of any controversy between the agile software developers and the 
+traditional data professionals within your organization.&nbsp;Agile software 
+developers will lean towards an evolutionary approach where data modeling is 
+just one of many activities whereas traditional data professionals will often 
+lean towards a <a href="http://www.agilemodeling.com/essays/bmuf.htm">big design up front (BDUF)</a> approach where data models are
+the primary artifacts, if not THE artifacts.&nbsp;
+This problem results from a combination of the 
+<a href="http://www.agiledata.org/essays/culturalImpedanceMismatch.html">cultural
+impedance mismatch</a>, a misguided need to enforce the
+<a href="http://www.agiledata.org/essays/oneTruth.html">"one truth"</a>, and “normal" political maneuvering within your
+organization.&nbsp;As a result Agile
+DBAs often find that navigating the political waters is an important part of
+their data modeling efforts.
+</p>
+<p>&nbsp;
+</p>
+<h3>6. How to <a name="BecomeABetterDataModeler">Become Better At Modeling Data</a></h3>
+How do you improve your data modeling skills?&nbsp;
+Practice, practice, practice.&nbsp;Whenever
+you get a chance you should work closely with Agile DBAs, volunteer to
+<a href="http://www.agilemodeling.com/practices.htm">model data with them</a>, and ask them questions as the work progresses.&nbsp;
+Agile DBAs will be following the AM practice <a href="http://www.agilemodeling.com/practices.htm#ModelWithOthers">Model With
+Others</a> so should welcome the assistance as well as the questions – one of
+the best ways to really learn your craft is to have someone as “why are you
+doing it that way".&nbsp;You should be
+able to learn physical data modeling skills from Agile DBAs, and often
+logical data modeling skills as well.&nbsp;&nbsp;&nbsp;&nbsp;<p></p>
+Similarly you should take the opportunity to work with the
+enterprise architects within your organization.
+&nbsp;As you saw in <a href="http://www.agiledata.org/essays/enterpriseArchitecture.html">Agile
+Enterprise Architecture</a> they should be taking an active role on your
+project, mentoring your project team in the enterprise architecture (if any),
+mentoring you in modeling and architectural skills, and aiding in your team’s
+modeling and development efforts.&nbsp;Once
+again, volunteer to work with them and ask questions when you are doing so.&nbsp;
+Enterprise architects will be able to teach you conceptual and logical
+data modeling skills as well as instill an appreciation for enterprise issues.<p></p>
+You also need to do some reading.&nbsp;
+Although this article is a good start it is only a brief introduction.&nbsp;
+The best approach is to simply ask the Agile DBAs that you work with
+what they think you should read.&nbsp;<p></p>
+My final word of
+advice is that it is critical for application developers to understand and
+appreciate the fundamentals of data modeling.&nbsp;
+This is a valuable skill to have and has been since the 1970s.&nbsp;
+It also provides a common framework within which you can work with Agile DBAs, and may even prove to be the initial skill that enables you to make
+a career transition into becoming a full-fledged Agile DBA.<p></p>
+<br>
+	   
+</article>
+  
+  
+  <footer>
+  <br><hr size="1">
+
+
+  <!-- Bottom advertising -->
+  <h3>Recommended Reading</h3>
+  <table border="0" width="100%">
+  <tbody><tr>
+    <td>
+  	 <a href="https://www.disciplinedagiledelivery.com/dad-handbook/" target="_blank">
+  	 	<img src="./Data Modeling 101_files/chooseWoWCover.jpg" alt="Choose Your WoW!" align="middle" height="150" border="1"></a>
+	</td>
+    <td>
+	This book, <a href="https://www.disciplinedagiledelivery.com/dad-handbook/" target="_blank">
+	Choose Your WoW! A Disciplined Agile Delivery Handbook for Optimizing Your Way of Working</a>, 
+	is an indispensable guide for agile coaches and practitioners to identify what techniques
+	- including practices, strategies, and lifecycles - are effective in certain situations
+	and not as effective in others. This advice is based on proven experience from hundreds
+	of organizations facing similar situations to yours. Every team is unique and faces a
+	unique situation, therefore they must choose and evolve a way of working (WoW) that is effective for
+	them. <a href="https://www.disciplinedagiledelivery.com/dad-handbook/" target="_blank">
+	Choose Your WoW!</a> describes how to do this effectively, whether they are just starting with agile/lean
+	or if they're already following Scrum, Kanban, SAFe, LeSS, Nexus, or other methods.
+	</td>
+  </tr>
+  </tbody></table>
+  I also maintain an <a href="http://agiledata.org/books.html" target="_blank">agile database books</a> page which overviews many books you will find interesting.
+
+  <!-- Bottom logo bar -->
+  <br>
+  <hr size="1">	
+  <p>
+  <a href="http://disciplinedagiledelivery.com/" target="_blank"><img border="0" src="./Data Modeling 101_files/buttonDAD.gif" alt="Disciplined Agile Delivery: The Foundation for Scaling Agile"></a>
+  <a href="http://agilemodeling.com/" target="_blank"><img border="0" src="./Data Modeling 101_files/buttonAM.gif" alt="Agile Modeling: Practices for Scaling Agile"></a>
+  <a href="http://agiledata.org/" target="_blank"><img border="0" src="./Data Modeling 101_files/buttonAD.gif" alt="Agile Data: Practices for Scaling Agile"></a>
+  <a href="http://enterpriseunifiedprocess.com/" target="_blank"><img border="0" src="./Data Modeling 101_files/buttonEUP.gif" alt="EnterpriseUP: Agility at Scale"></a>
+  <a href="http://ambysoft.com/" target="_blank"><img border="0" src="./Data Modeling 101_files/buttonAmbysoft.gif" alt="Ambysoft Inc."></a>
+  <a href="http://twitter.com/scottwambler" target="_blank"><img border="0" src="./Data Modeling 101_files/buttonSWATwitter.gif" alt="Follow @scottwambler on Twitter!"></a>
+  </p>
+
+  <!-- Copyright Notice -->
+  <hr size="1">	
+  <a href="http://www.ambysoft.com/licensing.html">Copyright</a> 2002-2019 <a href="http://www.ambysoft.com/">Ambysoft Inc.</a>
+  <br>
+  This site owned by <a href="http://www.ambysoft.com/">Ambysoft Inc.</a>
+  </footer>
+
+
+
+</font></form><iframe src="./Data Modeling 101_files/portal.html" id="st_gdpr_iframe" title="GDPR Consent Management" style="width: 0px; height: 0px; position: absolute; left: -5000px;"></iframe><div id="stcpDiv" style="position: absolute; top: -1999px; left: -1988px;">ShareThis Copy and Paste</div><div id="stwrapper" class="stwrapper stwrapper4x" style="display: none;"><iframe allowtransparency="true" id="stLframe" class="stLframe" name="stLframe" frameborder="0" scrolling="no" src="./Data Modeling 101_files/index.html"></iframe></div><div id="stOverlay" onclick="javascript:stWidget.closeWidget();"></div></body></html>

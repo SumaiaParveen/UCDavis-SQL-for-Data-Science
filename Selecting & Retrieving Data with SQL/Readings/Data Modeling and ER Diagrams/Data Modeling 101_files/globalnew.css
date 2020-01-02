@@ -1,0 +1,56 @@
+	body {
+		font-size: 10pt;
+		font-family: Arial;
+		margin-left: 8px;
+		margin-top: 8px;
+		
+	}
+
+	A:link {
+		font-size: 10pt;
+		color: #0055A6; text-decoration:none;  	}
+
+	A:visited {
+		font-size: 10pt;
+		color: Black;text-decoration:none
+	}
+
+	A:hover {
+		Color : Red;
+	}
+
+
+
+	TD.rowlabel {
+		font-size: 10pt;
+		font-weight: bold;
+		font-family: Arial;
+		background-color: #ffffcc
+	}
+	
+	
+	b.subheading {
+		font-size: 10pt;
+		font-family: Arial, Helvetica, sans-serif;
+	}
+
+.subheading {  color: #3366CC; font-size: 12pt; font-weight: bold}
+.submenu {  font-family: Arial, Helvetica, sans-serif}
+.maintitle {  color: #0055A6; font-size: 18pt; font-weight: bold}
+.titlebox { background-color: #E8E8E8 }
+
+/* START NAV MENU */
+nav {  background-color: #0055A6;  height:40px;} 
+nav a:link { color: white; } 
+nav a:visited { color: white; } 
+nav ul {  font-family: Arial, Helvetica, sans-serif;  font-size: 20px;  margin: 0;  padding: 0;  list-style: none;} 
+nav ul li {  display: block;  position: relative;  float: left; } 
+nav li ul {   display: none; } 
+nav ul li a {  background: #0055A6;  display: block;  text-decoration: none;  padding: 7px 15px 3px 15px;   margin-left: 1px;  white-space: nowrap;  height:30px; /* Width and height of top-level nav items */    text-align:center; } 
+nav ul li a:hover {   background: #0055A6; } 
+nav li:hover ul {  display: block;  position: absolute;  height:30px;} 
+nav li:hover li {  float: none;  font-size: 11px; } 
+nav li:hover a {   background: #0055A6;   height:30px; /* Height of lower-level nav items is shorter than main level */} 
+nav li:hover li a:hover {   color: #0055A6; background: #E8E8E8; } 
+nav ul li ul li a {  text-align:left; /* Top-level items are centered, but nested list items are left-aligned */} 
+/* END NAV MENU */
